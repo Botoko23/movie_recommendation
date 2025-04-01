@@ -1,0 +1,10 @@
+.DS_Store
+/data/movies_series.csv
+/iac/.terraform
+/iac/.terraform.lock.hcl
+/iac/terraform.tfstate
+/iac/terraform.tfstate.backup
+/image/models/finetuned_model/*
+/model_training/openai_embeddings.pkl
+movienv
+__pycache__

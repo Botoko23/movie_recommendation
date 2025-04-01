@@ -1,0 +1,12 @@
+pandas
+requests
+tqdm
+openai
+sentence-transformers
+tiktoken
+torch
+datasets
+pgvector
+psycopg2-binary
+SQLAlchemy
+python-dotenv
