@@ -5,6 +5,7 @@
 /iac/terraform.tfstate
 /iac/terraform.tfstate.backup
 /image/models/finetuned_model/*
+!/image/models/finetuned_model/.gitkeep
 /model_training/openai_embeddings.pkl
 movienv
 __pycache__
