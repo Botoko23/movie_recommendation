@@ -59,11 +59,11 @@ class RequestModel(BaseModel):
 class Recommendation(BaseModel):
     title: str
     originaltitle: str
-    releaseDate: str  # Using ISO 8601 format (from .isoformat())
-    genres: str  # Assuming it's a comma-separated string or None
+    releaseDate: str
+    genres: str 
     overview: str
     posterPath: str
-    rating: float  # Keeping as a string since it's explicitly converted in the code
+    rating: float  
     titleType: str
 
 class SuccessResponse(BaseModel):
@@ -86,5 +86,5 @@ class ErrorResponse(BaseModel):
     def create(cls, status_code: int, error: str):
         return cls(
             statusCode=status_code,
-            body={"message": "Invalid request", "error": error}
+            body={"error message": error}
         )

@@ -9,3 +9,4 @@
 /model_training/openai_embeddings.pkl
 movienv
 __pycache__
+/client

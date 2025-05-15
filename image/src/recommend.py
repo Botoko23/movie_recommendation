@@ -123,11 +123,13 @@ def recommend_by_user_plot(user_plot: str, release_period: List[str], title_type
 
 def lambda_handler(event: dict, context):
     try:
+        is_base64_encoded = event.get("isBase64Encoded", False)
+        body = event.get("body", False)
         # Decode if base64 encoded and body exists
-        if event.get("isBase64Encoded") and event.get("body", None):
-            event["body"] =  base64.b64decode(event["body"]).decode("utf-8")
+        if is_base64_encoded and body:
+            body = base64.b64decode(event["body"]).decode("utf-8")
 
-        event["body"] = json.loads(event["body"]) if event["body"] else {}
+        event["body"] = json.loads(body) if body else {}
         # Parse the request
         parsed_event = {
             "queryStringParameters": event.get("queryStringParameters", {}),
@@ -164,7 +166,11 @@ def lambda_handler(event: dict, context):
             recommendations, error  = recommend_by_user_plot(user_plot, release_period, title_type, min_rating, max_rating, limit)
             response = SuccessResponse.create(recommendations) if not error  else ErrorResponse.create(500, str(error))
     finally:
-        return response.model_dump_json(indent=2)
+        return {
+            'statusCode': response.statusCode,
+            'headers': response.headers,
+            'body': json.dumps(response.body) # Ensure body is a JSON string
+        }
     
 
 

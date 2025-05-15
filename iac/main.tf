@@ -1,3 +1,5 @@
+# data to get the resources already created
+
 data "aws_ecr_repository" "lambda-ecr-repo" {
   name = "example-lambda"
 }

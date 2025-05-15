@@ -1,4 +1,5 @@
 import os
+import json
 from math import ceil
 from typing import List
 
@@ -58,7 +59,7 @@ class ErrorResponse(BaseModel):
     def create(cls, status_code: int, error: str):
         return cls(
             statusCode=status_code,
-            body={"message": "Invalid request", "error": error}
+            body={"error message": error}
         )
 
 def get_db_connection():
@@ -137,7 +138,11 @@ def lambda_handler(event: dict, context):
             response = ErrorResponse.create(500, "Error with search system")
 
     finally:
-        return response.model_dump_json(indent=2)
+        return {
+        'statusCode': response.statusCode,
+        'headers': response.headers,
+        'body': json.dumps(response.body) # Ensure body is a JSON string
+    }
 
 if __name__ == "__main__":
 
